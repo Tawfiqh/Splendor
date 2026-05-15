@@ -7,7 +7,7 @@
 }
 
 .card-display-contents {
-    border-color: black;
+    border-color: rgba(0, 0, 0, 0.45);
     border-radius: 8px;
     border-style: solid;
     border-width: 3px;
@@ -28,7 +28,16 @@
     left: 5%;
     height: 18%;
     text-align: center;
-    padding: 0px;
+    padding: 0.2em 0.45em;
+    font-size: clamp(0.62rem, 1.5vh, 0.82rem);
+    font-weight: 650;
+    line-height: 1.15;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.reserve-button:hover:not(:disabled) {
+    background: #fff;
 }
 
 .buy-button {
@@ -38,7 +47,17 @@
     left: 5%;
     height: 18%;
     text-align: center;
-    padding: 0px;
+    padding: 0.2em 0.45em;
+    font-size: clamp(0.62rem, 1.5vh, 0.82rem);
+    font-weight: 650;
+    line-height: 1.15;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.buy-button:hover:not(:disabled) {
+    background: #fff;
 }
 
 .card-points {

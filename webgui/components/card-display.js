@@ -1,8 +1,9 @@
 Vue.component('card-display', {
     props: ['card', 'player', 'show_reserve_button', 'show_card_buttons'],
     computed: {
-        background_colour: function () {
-            return background_colours[this.card.colour];
+        card_background: function () {
+            var base = background_colours[this.card.colour];
+            return 'linear-gradient(165deg, rgba(255,255,255,0.28) 0%, rgba(0,0,0,0.06) 100%), ' + base;
         },
         buyable: function () {
             return this.player.can_afford(this.card)[0];
@@ -19,7 +20,7 @@ Vue.component('card-display', {
     },
     template: `
 <li class="card-display">
-<div class="card-display-contents" v-bind:style="{backgroundColor: background_colour}">
+<div class="card-display-contents" v-bind:style="{ background: card_background }">
     <p class="card-points" aria-label="Victory points">{{ card.points }}</p>
     <button class="reserve-button"
             v-if="show_reserve_button && show_card_buttons && reservable"
