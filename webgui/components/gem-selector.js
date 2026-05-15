@@ -44,52 +44,61 @@ Vue.component('gem-selector', {
         }
     },
     template: `
-<table class="gem-selector">
-  <tr style="margin-bottom:15px">
-    <td>current gems</td>
-    <gems-table-gem-counter v-for="(number, colour) in player_gems"
-        v-bind:key="colour"
-        v-bind:colour="colour"
-        v-bind:number="number">
-    </gems-table-gem-counter>
-  </tr>
-  <tr style="margin-bottom:15px">
-    <td>current cards</td>
-    <gems-table-card-counter v-for="(number, colour) in player_cards"
-        v-bind:key="colour"
-        v-bind:colour="colour"
-        v-bind:number="number">
-    </gems-table-card-counter>
-  </tr>
-  <tr><td style="height:7px"></td></tr>
-  <tr>
-    <td>gems gained</td>
-    <gems-table-gem-counter v-for="(number, colour) in gems"
-        v-bind:key="colour"
-        v-bind:colour="colour"
-        v-bind:number="number">
-    </gems-table-gem-counter>
-  </tr>
-  <tr>
-    <td></td>
-    <increment-button v-for="(number, colour) in gems"
-                      v-bind:key="colour"
-                      v-bind:enabled="can_increment[colour]"
-                      v-bind:show_button="show_button[colour]"
-                      v-on:increment="gems[$event] += 1"
-                      v-bind:colour="colour">
-    </increment-button>
-  </tr>
-  <tr>
-    <td></td>
-    <decrement-button v-for="(number, colour) in gems"
-                      v-bind:key="colour"
-                      v-bind:enabled="can_decrement[colour]"
-                      v-bind:show_button="show_button[colour]"
-                      v-on:decrement="gems[$event] -= 1"
-                      v-bind:colour="colour">
-    </decrement-button>
-  </tr>
-</table>
+<div class="gem-selector">
+  <div class="card gem-selector-card--hand">
+    <p class="card-title">Your gems &amp; cards</p>
+    <table class="gem-selector-table">
+      <tr>
+        <td>Gems</td>
+        <gems-table-gem-counter v-for="(number, colour) in player_gems"
+            v-bind:key="colour"
+            v-bind:colour="colour"
+            v-bind:number="number">
+        </gems-table-gem-counter>
+      </tr>
+      <tr>
+        <td>Cards</td>
+        <gems-table-card-counter v-for="(number, colour) in player_cards"
+            v-bind:key="colour"
+            v-bind:colour="colour"
+            v-bind:number="number">
+        </gems-table-card-counter>
+      </tr>
+    </table>
+  </div>
+  <div class="card gem-selector-card--supply">
+    <p class="card-title">From the supply (this turn)</p>
+    <table class="gem-selector-table">
+      <tr>
+        <td>Gems to take</td>
+        <gems-table-gem-counter v-for="(number, colour) in gems"
+            v-bind:key="colour"
+            v-bind:colour="colour"
+            v-bind:number="number">
+        </gems-table-gem-counter>
+      </tr>
+      <tr>
+        <td></td>
+        <increment-button v-for="(number, colour) in gems"
+                          v-bind:key="colour"
+                          v-bind:enabled="can_increment[colour]"
+                          v-bind:show_button="show_button[colour]"
+                          v-on:increment="gems[$event] += 1"
+                          v-bind:colour="colour">
+        </increment-button>
+      </tr>
+      <tr>
+        <td></td>
+        <decrement-button v-for="(number, colour) in gems"
+                          v-bind:key="colour"
+                          v-bind:enabled="can_decrement[colour]"
+                          v-bind:show_button="show_button[colour]"
+                          v-on:decrement="gems[$event] -= 1"
+                          v-bind:colour="colour">
+        </decrement-button>
+      </tr>
+    </table>
+  </div>
+</div>
 `
 });
