@@ -13,6 +13,17 @@
     font-size: 17px;
 }
 
+.gem-selector-table .gem-selector-draft-cell {
+    box-sizing: border-box;
+    vertical-align: top;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    height: auto;
+    margin: 0;
+    padding: 2px;
+}
+
 .gem-selector-table .gems-table-gem-counter {
     border-radius: 50%;
 }
