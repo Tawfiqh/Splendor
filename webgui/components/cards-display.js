@@ -53,7 +53,8 @@ Vue.component('cards-display', {
     <ul class="single-line-list">
       <tier-deck-slot
           v-if="show_deck_slot"
-          v-bind:name="tier"
+          v-bind:name="name"
+          v-bind:tier="tier"
           v-bind:style="{width:card_width,maxWidth:card_width,minWidth:card_width}"
           v-bind:deck_count="deck_count"
           v-bind:show_reserve_button="show_reserve_button"

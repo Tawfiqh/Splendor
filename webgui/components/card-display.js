@@ -16,22 +16,11 @@ Vue.component('card-display', {
             }
             return "5%";
         },
-        tier_modifier_class: function () {
-            var t = this.card.tier;
-            if (t === 1 || t === 2 || t === 3) {
-                return 'card-display-contents--tier-' + t;
-            }
-            return 'card-display-contents--tier-1';
-        },
     },
     template: `
 <li class="card-display">
-<div class="card-display-contents"
-     v-bind:class="tier_modifier_class"
-     v-bind:style="{backgroundColor: background_colour}">
-    <div class="card-points-badge"
-         v-bind:class="'card-points-badge--tier-' + card.tier"
-         aria-label="Victory points">
+<div class="card-display-contents" v-bind:style="{backgroundColor: background_colour}">
+    <div class="card-points-badge" aria-label="Victory points">
         {{ card.points }}
     </div>
     <button class="reserve-button"
