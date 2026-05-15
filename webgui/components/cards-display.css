@@ -6,6 +6,7 @@
 .cards-display {
     display: flex;
     height: 32.5%;
+    width: 100%;
     border-color: green;
     border-radius: 5px;
     margin-top: 0.833%;
@@ -24,17 +25,28 @@
     margin-top: 1%;
     height: 98%;
     min-height: 98%;
-    width: 90%;
+    width: 100%;
     border-width: 3px;
     border-color: purple;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    flex: 1;
+    min-height: 0;
 }
 
-.single-line-list {
+.cards-display .single-line-list {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
     align-content: center;
     list-style: none;
-    padding: 0px;
+    padding: 0;
+    margin: 0;
+    gap: clamp(6px, 1vw, 10px);
+}
+
+.cards-display .single-line-list > li {
+    flex: 1 1 0;
+    min-width: 0;
 }

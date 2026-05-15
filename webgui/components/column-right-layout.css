@@ -12,6 +12,12 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+}
+
+.column-right-main .market-displays {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .column-right-sidebar {

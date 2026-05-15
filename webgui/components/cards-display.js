@@ -36,17 +36,6 @@ Vue.component('cards-display', {
         show_deck_slot: function () {
             return this.show_reserve_button && this.tier !== 'hand';
         },
-        total_slots: function () {
-            var n = this.num_cards;
-            if (this.show_deck_slot) {
-                n += 1;
-            }
-            return n;
-        },
-        card_width: function () {
-            var n = this.total_slots;
-            return ((100 - n * 2) / n).toString() + '%';
-        },
     },
     template: `
 <div class="cards-display">
@@ -55,7 +44,6 @@ Vue.component('cards-display', {
           v-if="show_deck_slot"
           v-bind:name="name"
           v-bind:tier="tier"
-          v-bind:style="{width:card_width,maxWidth:card_width,minWidth:card_width}"
           v-bind:deck_count="deck_count"
           v-bind:show_reserve_button="show_reserve_button"
           v-bind:show_card_buttons="show_card_buttons"
@@ -63,7 +51,6 @@ Vue.component('cards-display', {
           v-on:reserve-deck="reserve_from_deck">
       </tier-deck-slot>
       <card-display
-          v-bind:style="{width:card_width,maxWidth:card_width,minWidth:card_width}"
           v-for="card in cards"
           v-bind:show_reserve_button="show_reserve_button"
           v-bind:show_card_buttons="show_card_buttons"
