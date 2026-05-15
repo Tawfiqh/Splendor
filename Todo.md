@@ -4,8 +4,8 @@ FE - information architecture:
     - Move the “moves log” to a panel on the right that has clear rows and auto scrolls to the bottom + highlights the last move!
     - In gem-selector, also show the current supply, so they know how many they are taking and how many are left
 
-Fe - Functions:
-- Make each row clickable so you can reserve randomly from top of the stack
+✅ Fe - Functions:
+- ✅ Make each row clickable so you can reserve randomly from top of the stack
     
 
 FE style:
