@@ -8,7 +8,7 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 - The `webgui/` folder is a **static** page (Vue 2 from `vue.min.js`, no bundler).
 
 ## How it works (high level)
-1. `webgui/index.html` loads Vue, Math.js, exported weights, then game/AI scripts, then `move-maker.js` and `script.js` (Vue app bootstrap).
+1. `webgui/index.html` loads Vue, Math.js, exported weights, then game/AI scripts, then `components/gem-selector.js`, `components/move-maker.js`, and `script.js` (Vue app bootstrap).
 2. All game logic and inference run in the browser.
 3. `lapidary/export_weights.py` can regenerate `weights.js` from the trained TensorFlow checkpoint (run from a directory where you want `weights.js` written).
 
@@ -17,7 +17,9 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 
 ## How each piece works
 
-- **`webgui/move-maker.js`** — Registers the Vue `move-maker` component (take-gems UI). Loaded before `script.js` so it is registered before `new Vue()` runs; it relies on globals from `game.js` (`colours`) and on `gem-selector` from `script.js` (Vue resolves child components when the app renders).
+- **`webgui/components/gem-selector.js`** — Registers the Vue `gem-selector` component (per-colour +/- controls for taking gems). Uses `colours` from `game.js` and table/button components registered in `script.js`; it loads before `script.js` so it is registered before `new Vue()`, and child tags resolve when the app renders.
+
+- **`webgui/components/move-maker.js`** — Registers the Vue `move-maker` component (take-gems UI). Depends on `gem-selector` and `colours`; loaded after `gem-selector.js` and before `script.js`.
 
 - **`run.sh`** — Ensures `webgui/vue.min.js` (copy from `docs/`), `webgui/math.min.js` (pinned CDN download), and a stub `dynamic_test_state.js` if missing; then runs `python3 -m http.server` from `webgui/`. Override port with `PORT=9000 ./run.sh`.
 
