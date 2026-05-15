@@ -430,8 +430,20 @@ h1 {
     margin-bottom: 20px;
 }
 
+.nobles-display {
+    align-items: flex-start;
+    display: block;
+    /* Dont use flex for this */
+}
+
 .nobles-display li {
     margin-top: 3px;
+    list-style: none;
+}
+
+.nobles-list {
+    list-style: none;
+    padding-left: 0px;
 }
 
 

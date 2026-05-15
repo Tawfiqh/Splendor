@@ -216,7 +216,7 @@ Vue.component('gem-discarder-table', {
                       v-bind:show_button="true"
                       v-on:increment="increment($event)"
                       v-bind:colour="colour">
- e  </increment-button>
+    </increment-button>
   </tr>
   <tr>
     <td>
@@ -476,8 +476,6 @@ Vue.component('supply-display', {
     <gems-table v-bind:gems="gems"
                 v-bind:show_card_count="show_card_count">
     </gems-table>
-    <nobles-display v-bind:nobles="nobles">
-    </nobles-display>
 </div>
 `
 });
@@ -509,9 +507,12 @@ Vue.component('nobles-display', {
         },
     },
     template: `
-<ul class="nobles-display">
-    <li v-for="noble_string in noble_strings"><span v-html="noble_string"></span></li>
-</ul>
+<div v-if="noble_strings.length" class="nobles-display card">
+    <p class="card-title">Nobles</p>
+    <ul class="nobles-list">
+        <li v-for="noble_string in noble_strings"><span v-html="noble_string"></span></li>
+    </ul>
+</div>
 `
 });
 

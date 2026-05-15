@@ -62,6 +62,10 @@
                         v-bind:nobles="state.nobles"
                         v-bind:show_card_count="false">
         </supply-display>
+
+        <nobles-display v-bind:nobles="state.nobles">
+        </nobles-display>
+
         <player-display v-for="(player, index) in players"
                         v-bind:key="player.id"
                         v-bind:player="player"
