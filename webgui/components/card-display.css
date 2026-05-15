@@ -73,6 +73,6 @@
     border-color: pink;
     border-radius: 5px; */
     border: none;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: white;
+    /* -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: white; */
 }

@@ -36,10 +36,16 @@ Vue.component('cards-display', {
         show_deck_slot: function () {
             return this.show_reserve_button && this.tier !== 'hand';
         },
+        hand_row_style: function () {
+            if (this.tier !== 'hand') {
+                return {};
+            }
+            return { '--hand-slots': String(this.num_cards) };
+        },
     },
     template: `
-<div class="cards-display">
-    <ul class="single-line-list">
+<div class="cards-display" v-bind:class="{ 'cards-display--hand': tier === 'hand' }">
+    <ul class="single-line-list" v-bind:style="hand_row_style">
       <tier-deck-slot
           v-if="show_deck_slot"
           v-bind:name="name"

@@ -1,52 +1,59 @@
 Vue.component('gem-selector', {
-    props: ['supply_gems', 'gems', 'player_gems', 'player_cards'],
-    computed: {
-        can_increment: function () {
-            var any_value_2 = false;
-            var num_values_1 = 0;
-            for (var i = 0; i < colours.length; i++) {
-                var colour = colours[i];
-                if (this.gems[colour] >= 2) {
-                    any_value_2 = true;
-                }
-                if (this.gems[colour] == 1) {
-                    num_values_1 += 1;
-                }
-            }
-            var incrementable = {};
-            for (var i = 0; i < colours.length; i++) {
-                var colour = colours[i];
-                incrementable[colour] = !any_value_2 && (
-                    (num_values_1 == 1 && this.gems[colour] == 1 && this.supply_gems[colour] > 3) ||
-                    ((num_values_1 < 3) && this.supply_gems[colour] > 0 && this.gems[colour] == 0));
-            }
-            return incrementable;
-        },
-        can_decrement: function () {
-            var decrementable = {};
-            for (var i = 0; i < colours.length; i++) {
-                var colour = colours[i];
-                decrementable[colour] = (this.gems[colour] > 0);
-            }
-            return decrementable;
-        },
-        show_button: function () {
-            let show = {};
-            for (let colour of colours) {
-                if (this.supply_gems[colour] > 0) {
-                    show[colour] = true;
-                } else {
-                    show[colour] = false;
-                }
-            }
-            show['gold'] = false;
-            return show;
+  props: ['supply_gems', 'gems', 'player_gems', 'player_cards'],
+  computed: {
+    can_increment: function () {
+      var any_value_2 = false;
+      var num_values_1 = 0;
+      for (var i = 0; i < colours.length; i++) {
+        var colour = colours[i];
+        if (this.gems[colour] >= 2) {
+          any_value_2 = true;
         }
+        if (this.gems[colour] == 1) {
+          num_values_1 += 1;
+        }
+      }
+      var incrementable = {};
+      for (var i = 0; i < colours.length; i++) {
+        var colour = colours[i];
+        incrementable[colour] = !any_value_2 && (
+          (num_values_1 == 1 && this.gems[colour] == 1 && this.supply_gems[colour] > 3) ||
+          ((num_values_1 < 3) && this.supply_gems[colour] > 0 && this.gems[colour] == 0));
+      }
+      return incrementable;
     },
-    template: `
+    can_decrement: function () {
+      var decrementable = {};
+      for (var i = 0; i < colours.length; i++) {
+        var colour = colours[i];
+        decrementable[colour] = (this.gems[colour] > 0);
+      }
+      return decrementable;
+    },
+    show_button: function () {
+      let show = {};
+      for (let colour of colours) {
+        if (this.supply_gems[colour] > 0) {
+          show[colour] = true;
+        } else {
+          show[colour] = false;
+        }
+      }
+      show['gold'] = false;
+      return show;
+    },
+    total_player_gems: function () {
+      let total = 0;
+      for (let colour in this.player_gems) {
+        total += this.player_gems[colour];
+      }
+      return total;
+    }
+  },
+  template: `
 <div class="gem-selector">
   <div class="card gem-selector-card--hand">
-    <p class="card-title">Your gems &amp; cards</p>
+    <p class="card-title">Your gems <span class="gem-total">({{ total_player_gems }})</span>:</p>
     <table class="gem-selector-table">
       <tr>
         <gems-table-gem-counter v-for="(number, colour) in player_gems"

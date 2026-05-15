@@ -43,10 +43,29 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: clamp(6px, 1vw, 10px);
+    --card-gap: clamp(6px, 1vw, 10px);
+    gap: var(--card-gap);
 }
 
 .cards-display .single-line-list > li {
     flex: 1 1 0;
+    min-width: 0;
+}
+
+/*
+ * Hand / reserved cards: only 1–3 items may be present; keep each card the
+ * width of one of num_cards slots so a single reserve does not span the row.
+ */
+.cards-display--hand .single-line-list {
+    justify-content: flex-start;
+}
+
+.cards-display--hand .single-line-list > li {
+    flex: 0 0 calc(
+        (100% - (var(--hand-slots, 3) - 1) * var(--card-gap)) / var(--hand-slots, 3)
+    );
+    max-width: calc(
+        (100% - (var(--hand-slots, 3) - 1) * var(--card-gap)) / var(--hand-slots, 3)
+    );
     min-width: 0;
 }

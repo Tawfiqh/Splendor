@@ -40,3 +40,8 @@
     text-transform: uppercase;
     text-align: center;
 }
+
+.gem-total {
+    font-weight: 500;
+    color: #666;
+}
