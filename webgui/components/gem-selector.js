@@ -15,11 +15,11 @@ Vue.component('gem-selector-draft-cell', {
       var after = this.after_pick;
       var take = this.number;
       if (take === 0) {
-        return pool === 1 ? '1 gem in supply' : pool + ' gems in supply';
+        return pool + "";
       }
-      var leftPart = pool + ' in supply';
-      var rightPart = (after === 0 && take > 0) ? 'none left' : (after + ' after');
-      return leftPart + ' · ' + rightPart;
+
+      var remaining = after //(after === 0 && take > 0) ? 'none left' : (after + ' after');
+      return remaining + "";
     },
     cell_aria_label: function () {
       var n = this.number;
@@ -39,16 +39,17 @@ Vue.component('gem-selector-draft-cell', {
     role="group"
     v-bind:aria-label="cell_aria_label">
   <div class="gem-selector-draft-stack">
+      <span v-if="hint_line"
+          class="gem-selector-supply-hint"
+          v-bind:class="{ 'gem-selector-supply-hint--empty': supply_dimmed }">
+      {{ hint_line }}
+    </span>
     <div class="gem-selector-draft-disc"
          v-bind:style="{ background: background_colour, borderColor: border_colour }"
          aria-hidden="true">
       {{ number }}
     </div>
-    <span v-if="hint_line"
-          class="gem-selector-supply-hint"
-          v-bind:class="{ 'gem-selector-supply-hint--empty': supply_dimmed }">
-      {{ hint_line }}
-    </span>
+
   </div>
 </td>
 `
@@ -141,7 +142,7 @@ Vue.component('gem-selector', {
     </table>
   </div>
   <div class="card gem-selector-card--supply">
-    <p class="card-title">From the supply (this turn)</p>
+    <p class="card-title">Pick from the supply</p>
     <table class="gem-selector-table">
       <tr>
 
@@ -151,7 +152,7 @@ Vue.component('gem-selector', {
             v-bind:number="number"
             v-bind:in_supply="supply_gems[colour] != null ? supply_gems[colour] : 0"
             v-bind:after_pick="supply_after_pick[colour]"
-            v-bind:show_supply_hint="colour !== 'gold'">
+            v-bind:show_supply_hint="true">
         </gem-selector-draft-cell>
       </tr>
       <tr>
