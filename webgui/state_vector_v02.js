@@ -41,7 +41,7 @@ function state_vector_v02(state, index=null) {
         state_components.push(arr);
 
         arr = zeros(11);
-        arr[player.total_num_gems()] = 1;
+        arr[Math.min(player.total_num_gems(), 10)] = 1;
         state_components.push(arr);
     }
 
@@ -340,6 +340,6 @@ function state_vector_v02(state, index=null) {
     for (let input_arr of state_components) {
         output_arr.push(...input_arr);
     }
-    
+
     return output_arr;
 }

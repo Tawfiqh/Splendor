@@ -25,6 +25,8 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 
 - **Moves log** — **`moveToHtml`** (in `moves-log-display.js`) builds each line’s HTML; colours use `style.css`. The list zebra-stripes rows, highlights the newest, and **auto-scrolls** to the bottom when `moves` grows (`watch` + **`mounted`** + `$nextTick`).
 
+- **State vector vs neural net (`state_vector_v02.js`)** — The JS feature vector must stay **2300** floats wide to match `weights.js` / `INPUT_SIZE` in `lapidary/nn.py`. For the per-player **total gem count** one-hot (`zeros(11)`), simulation can briefly exceed 10 gems before discard; assigning `arr[11] = 1` in JS **extends the array** to length 12 and corrupts the vector. Always index with **`Math.min(player.total_num_gems(), 10)`**, matching Python `set_player_gems(..., 'all', number)` which uses **`min(number, 10)`**.
+
 - **`run.sh`** — Ensures `webgui/vue.min.js` (copy from `docs/`), `webgui/math.min.js` (pinned CDN download), and a stub `dynamic_test_state.js` if missing; then runs `python3 -m http.server` from `webgui/`. Override port with `PORT=9000 ./run.sh`.
 
 ## Things that don't work well
