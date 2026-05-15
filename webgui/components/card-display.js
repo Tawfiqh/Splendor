@@ -20,9 +20,7 @@ Vue.component('card-display', {
     template: `
 <li class="card-display">
 <div class="card-display-contents" v-bind:style="{backgroundColor: background_colour}">
-    <div class="card-points-badge" aria-label="Victory points">
-        {{ card.points }}
-    </div>
+    <p class="card-points" aria-label="Victory points">{{ card.points }}</p>
     <button class="reserve-button"
             v-if="show_reserve_button && show_card_buttons && reservable"
             v-bind:disabled="!reservable"
