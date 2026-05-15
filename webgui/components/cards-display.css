@@ -1,0 +1,40 @@
+.player-display cards-display {
+    max-height: 150px;
+    height: 150px;
+}
+
+.cards-display {
+    display: flex;
+    height: 32.5%;
+    border-color: green;
+    border-radius: 5px;
+    margin-top: 0.833%;
+}
+
+.cards-display h3 {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    vertical-align: middle;
+    align-self: center;
+    font-size: 35px;
+}
+
+.cards-display ul {
+    margin-top: 1%;
+    height: 98%;
+    min-height: 98%;
+    width: 90%;
+    border-width: 3px;
+    border-color: purple;
+    flex-wrap: wrap;
+}
+
+.single-line-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    list-style: none;
+    padding: 0px;
+}

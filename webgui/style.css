@@ -18,11 +18,6 @@ h1 {
     margin-left: 10px;
 }
 
-.player-display cards-display {
-    max-height: 150px;
-    height: 150px;
-}
-
 .market-displays {
     height: 55vh;
     max-height: 70vw;
@@ -30,109 +25,6 @@ h1 {
     border-radius: 5px;
     /* border-style: solid; */
 }
-
-.cards-display {
-    display: flex;
-    height: 32.5%;
-    border-color: green;
-    border-radius: 5px;
-    margin-top: 0.833%;
-    /* border-style: solid; */
-}
-
-.cards-display h3 {
-    /* min-width: 8%; */
-    margin-left: 10px;
-    margin-right: 10px;
-    text-align: center;
-    vertical-align: middle;
-    align-self: center;
-    font-size: 35px;
-}
-
-.cards-display ul {
-    /* max-height: 180px; */
-    /* height: 180px; */
-    margin-top: 1%;
-    height: 98%;
-    min-height: 98%;
-    width: 90%;
-    border-width: 3px;
-    border-color: purple;
-    /* border-style: solid; */
-    flex-wrap: wrap;
-}
-
-.card-display {
-    display: inline-block;
-    max-height: 100%;
-    min-height: 100%;
-    height: 100%;
-    padding-right: 2%;
-    /* opacity: 0.1; */
-    /* padding-left: 10px; */
-}
-
-.card-display-contents {
-    border-color: black;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 3px;
-    padding: 0px;
-    height: 100%;
-    min-height: 100%;
-    max-height: 100%;
-    width: 100%;
-    text-align: center;
-    position: relative;
-}
-
-/* .card-display-contents button { */
-/*     width: 90%; */
-/*     /\* margin-top: 5px; *\/ */
-/*     position: absolute; */
-/*     top: 0px; */
-/* } */
-
-.reserve-button {
-    position: absolute;
-    width: 60%;
-    top: 5%;
-    left: 5%;
-    height: 18%;
-    text-align: center;
-    padding: 0px;
-}
-
-.buy-button {
-    position: absolute;
-    width: 60%;
-    top: 26%;
-    left: 5%;
-    height: 18%;
-    text-align: center;
-    padding: 0px;
-}
-
-.card-points {
-    position: absolute;
-    top: 6%;
-    right: 8%;
-    padding-top: 0px;
-    margin-top: 0px;
-    /* text-align: right; */
-    font-weight: bold;
-    /* margin-right: 5px; */
-    font-size: 2.8vh;
-    border-width: 3px;
-    /* border-style: solid; */
-    border-color: pink;
-    border-radius: 5px;
-}
-
-/* .card-display:hover { */
-/*     margin-top: 8px; */
-/* } */
 
 .row {
     display: flex;
@@ -160,16 +52,6 @@ h1 {
     padding-right: 5px;
     max-width: 62vh;
     text-align: center;
-}
-
-.single-line-list {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    list-style: none;
-    padding: 0px;
-    /* white-space: nowrap; */
 }
 
 /* .unstyled-list { */

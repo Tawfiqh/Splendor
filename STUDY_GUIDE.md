@@ -8,7 +8,7 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 - The `webgui/` folder is a **static** page (Vue 2 from `vue.min.js`, no bundler).
 
 ## How it works (high level)
-1. `webgui/index.html` loads Vue, Math.js, exported weights, then game/AI scripts, then `components/`, and `script.js` (Vue app bootstrap).
+1. `webgui/index.html` loads Vue, Math.js, exported weights, then game/AI scripts, then shared UI `components/`, then **card market components** in a fixed order (`card-display.js` → `tier-deck-slot.js` → `cards-display.js`, because `cards-display` nests the other two), then `script.js` (Vue app bootstrap).
 2. All game logic and inference run in the browser.
 3. `lapidary/export_weights.py` can regenerate `weights.js` from the trained TensorFlow checkpoint (run from a directory where you want `weights.js` written).
 
@@ -17,7 +17,9 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 
 ## How each piece works
 
-- **`webgui/components/*`** — Registers Vue UI pieces (`gem-selector.js`, `move-maker.js`, `supply-display.js`, `nobles-display.js`, etc.). They use the global `colours` from `game.js` and child tags such as `gems-table` from `script.js`; scripts load before `script.js` so components register before `new Vue()`, and child tags resolve when the app renders.
+- **`webgui/components/*`** — Each file registers one Vue component plus matching CSS where needed. Shared pieces: `gem-selector.js`, `move-maker.js`, `supply-display.js`, `nobles-display.js`, etc. They rely on globals from `game.js` and on tags defined in `script.js` (for example `gems-table`). Scripts load before `script.js` so components register before `new Vue()`.
+
+- **Market card UI** — `card-display.js` renders one development card (points, cost, buy/reserve). `tier-deck-slot.js` is the face-down **deck** control for blind reserve: clicking it emits a reserve with `index: -1`, which `GameState` implements by popping from `cards_in_deck[tier]`. `cards-display.js` lays out one row: optional deck slot (only when `tier` is not `"hand"` and reserve is enabled) plus the face-up cards; it receives `deck_count` from `state.tier_N.length` for tier 3/2/1. The player’s reserved cards in hand reuse `cards-display` with `tier="hand"`, which hides the deck slot.
 
 
 - **`run.sh`** — Ensures `webgui/vue.min.js` (copy from `docs/`), `webgui/math.min.js` (pinned CDN download), and a stub `dynamic_test_state.js` if missing; then runs `python3 -m http.server` from `webgui/`. Override port with `PORT=9000 ./run.sh`.
