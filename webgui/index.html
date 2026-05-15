@@ -115,6 +115,8 @@
                     v-bind:supply_gems="supply_gems"
                     v-on:take_gems="do_move_gems($event)">
         </move-maker>
+
+
         <gem-discarder v-show="discarding"
                        v-on:discard_gems="do_discard_gems()"
                        v-bind:player="current_player"
@@ -142,6 +144,7 @@
   <script src="state_vector_v02.js"></script>
   <script src="ai.js"></script>
   <script src="game.js"></script>
+  <script src="components/move-maker.js"></script>
   <script src="script.js"></script>
 
 </body>

@@ -8,7 +8,7 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 - The `webgui/` folder is a **static** page (Vue 2 from `vue.min.js`, no bundler).
 
 ## How it works (high level)
-1. `webgui/index.html` loads Vue, Math.js, exported weights, then game/AI scripts.
+1. `webgui/index.html` loads Vue, Math.js, exported weights, then game/AI scripts, then `move-maker.js` and `script.js` (Vue app bootstrap).
 2. All game logic and inference run in the browser.
 3. `lapidary/export_weights.py` can regenerate `weights.js` from the trained TensorFlow checkpoint (run from a directory where you want `weights.js` written).
 
@@ -16,6 +16,8 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 - **Static webgui (no Vite/npm)** — zero build step; easy to host on GitHub Pages or open offline. Tradeoff: you manage vendor files (`vue.min.js`, `math.min.js`) yourself.
 
 ## How each piece works
+
+- **`webgui/move-maker.js`** — Registers the Vue `move-maker` component (take-gems UI). Loaded before `script.js` so it is registered before `new Vue()` runs; it relies on globals from `game.js` (`colours`) and on `gem-selector` from `script.js` (Vue resolves child components when the app renders).
 
 - **`run.sh`** — Ensures `webgui/vue.min.js` (copy from `docs/`), `webgui/math.min.js` (pinned CDN download), and a stub `dynamic_test_state.js` if missing; then runs `python3 -m http.server` from `webgui/`. Override port with `PORT=9000 ./run.sh`.
 

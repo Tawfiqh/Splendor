@@ -34,8 +34,6 @@ function shuffle(array) {
 }
 
 
-var test_state = new GameState();
-
 
 Vue.component('gems-table', {
     props: ['gems', 'cards', 'show_card_count'],
@@ -62,10 +60,10 @@ Vue.component('gems-table', {
 Vue.component('gems-table-gem-counter', {
     props: ['colour', 'number'],
     computed: {
-        border_colour: function() {
+        border_colour: function () {
             return border_colours[this.colour];
         },
-        background_colour: function() {
+        background_colour: function () {
             return background_colours[this.colour];
         }
     },
@@ -80,10 +78,10 @@ Vue.component('gems-table-gem-counter', {
 Vue.component('gems-table-card-counter', {
     props: ['colour', 'number'],
     computed: {
-        border_colour: function() {
+        border_colour: function () {
             return border_colours[this.colour];
         },
-        background_colour: function() {
+        background_colour: function () {
             return background_colours[this.colour];
         }
     },
@@ -97,9 +95,11 @@ Vue.component('gems-table-card-counter', {
 
 
 Vue.component('gems-list', {
-    props: {gems: {},
-            title: "",
-            display_zeros: {default: true}},
+    props: {
+        gems: {},
+        title: "",
+        display_zeros: { default: true }
+    },
     template: `
 <div class="gems-list">
     <h3 v-if="title">{{ title }}</h3>
@@ -119,10 +119,10 @@ Vue.component('gems-list', {
 Vue.component('gem-counter', {
     props: ['colour', 'number'],
     computed: {
-        border_colour: function() {
+        border_colour: function () {
             return border_colours[this.colour];
         },
-        background_colour: function() {
+        background_colour: function () {
             return background_colours[this.colour];
         }
     },
@@ -137,7 +137,7 @@ Vue.component('gem-counter', {
 Vue.component('gem-discarder', {
     props: ['player', 'gems_discarded', 'player_gems'],
     methods: {
-        discard_gems: function() {
+        discard_gems: function () {
             this.$emit('discard_gems');
         }
     },
@@ -167,21 +167,21 @@ Vue.component('gem-discarder-table', {
         }
     },
     computed: {
-        total_player_gems: function() {
+        total_player_gems: function () {
             let total_gems = 0;
             for (let colour of all_colours) {
                 total_gems += this.player_gems[colour];
             }
             return total_gems;
         },
-        can_increment: function() {
+        can_increment: function () {
             let incrementable = {};
             for (let colour of all_colours) {
                 incrementable[colour] = this.gems_discarded[colour] > 0;
             }
             return incrementable;
         },
-        can_decrement: function() {
+        can_decrement: function () {
             let decrementable = {};
             let total_gems = this.total_player_gems;
             for (let colour of all_colours) {
@@ -190,7 +190,7 @@ Vue.component('gem-discarder-table', {
             return decrementable;
         },
         computed: {
-            show_button: function() {
+            show_button: function () {
                 return true;
             }
         }
@@ -243,57 +243,10 @@ Vue.component('gem-discarder-table', {
 `
 });
 
-Vue.component('move-maker', {
-    props: ['player', 'supply_gems', 'gems', 'player_gems', 'player_cards'],
-    methods: {
-        take_gems: function() {
-            this.$emit('take_gems', this.gems);
-        }
-    },
-    computed: {
-        any_gems_selected: function() {
-            var any_gems_in_supply = false;
-            for (let colour of colours) {
-                if (this.supply_gems[colour] > 0) {
-                    any_gems_in_supply = true;
-                    break;
-                }
-            }
-
-            if (!any_gems_in_supply) {
-                return true;  // no gems in supply, so can 'take gems'
-                              // without selecting any
-            }
-
-            var any_selected = false;
-            for (let colour of colours) {
-                if (this.gems[colour] > 0) {
-                    any_selected = true;
-                    break;
-                }
-            }
-            return any_selected;
-        }
-    },
-    template: `
-<div class="move-maker">
-  <gem-selector v-bind:supply_gems="supply_gems"
-                v-bind:player_gems="player_gems"
-                v-bind:player_cards="player_cards"
-                v-bind:gems="gems">
-  </gem-selector>
-  <button v-on:click="take_gems()"
-          v-bind:disabled="!any_gems_selected && false">
-    take gems
-  </button>
-</div>
-`
-});
-
 Vue.component('gem-selector', {
     props: ['supply_gems', 'gems', 'player_gems', 'player_cards'],
     computed: {
-        can_increment: function() {
+        can_increment: function () {
             var any_value_2 = false;
             var num_values_1 = 0;
             for (var i = 0; i < colours.length; i++) {
@@ -309,12 +262,12 @@ Vue.component('gem-selector', {
             for (var i = 0; i < colours.length; i++) {
                 var colour = colours[i];
                 incrementable[colour] = !any_value_2 && (
-                    (num_values_1 == 1 && this.gems[colour] == 1 && this.supply_gems[colour] > 3) || 
-                        ((num_values_1 < 3) && this.supply_gems[colour] > 0 && this.gems[colour] == 0));
+                    (num_values_1 == 1 && this.gems[colour] == 1 && this.supply_gems[colour] > 3) ||
+                    ((num_values_1 < 3) && this.supply_gems[colour] > 0 && this.gems[colour] == 0));
             }
             return incrementable;
         },
-        can_decrement: function() {
+        can_decrement: function () {
             var decrementable = {};
             for (var i = 0; i < colours.length; i++) {
                 var colour = colours[i];
@@ -322,13 +275,13 @@ Vue.component('gem-selector', {
             }
             return decrementable;
         },
-        show_button: function() {
+        show_button: function () {
             let show = {};
             for (let colour of colours) {
                 if (this.supply_gems[colour] > 0) {
                     show[colour] = true;
                 } else {
-                show[colour] = false;
+                    show[colour] = false;
                 }
             }
             show['gold'] = false;
@@ -389,7 +342,7 @@ Vue.component('gem-selector', {
 Vue.component('increment-button', {
     props: ['colour', 'enabled', 'show_button'],
     computed: {
-        show: function() {
+        show: function () {
             if (this.show_button) {
                 return 1;
             }
@@ -410,7 +363,7 @@ Vue.component('increment-button', {
 Vue.component('decrement-button', {
     props: ['colour', 'enabled', 'show_button'],
     computed: {
-        show: function() {
+        show: function () {
             if (this.show_button) {
                 return 1;
             }
@@ -431,39 +384,39 @@ Vue.component('decrement-button', {
 Vue.component('player-display', {
     props: ['player', 'is_current_player', 'can_show_card_buttons', 'is_human'],
     computed: {
-        player_num_gems: function() {
+        player_num_gems: function () {
             return (this.player.gems['white'] +
-                    this.player.gems['blue'] +
-                    this.player.gems['green'] +
-                    this.player.gems['red'] +
-                    this.player.gems['black'] +
-                    this.player.gems['gold']);
+                this.player.gems['blue'] +
+                this.player.gems['green'] +
+                this.player.gems['red'] +
+                this.player.gems['black'] +
+                this.player.gems['gold']);
         },
-        border_width: function() {
+        border_width: function () {
             if (this.is_current_player) {
                 return "6px";
             }
             return "5px";
         },
-        border_colour: function() {
+        border_colour: function () {
             if (this.is_current_player) {
                 return 'green';
             }
             return '#bbeebb';
         },
-        background_colour: function() {
+        background_colour: function () {
             if (this.is_current_player) {
                 return '#eeffee';
             }
             return '#ffffee';
         },
-        player_type: function() {
+        player_type: function () {
             if (this.is_human) {
                 return 'you';
             }
             return 'AI'
         },
-        show_card_buttons: function() {
+        show_card_buttons: function () {
             if (!this.is_current_player) {
                 return false;
             }
@@ -500,7 +453,7 @@ Vue.component('player-display', {
 Vue.component('cards-display', {
     props: ['cards', 'name', 'tier', 'player', 'show_reserve_button', 'num_cards', 'show_card_buttons'],
     methods: {
-        reserve: function(card) {
+        reserve: function (card) {
             var card_index;
             for (var i = 0; i < this.cards.length; i++) {
                 if (this.cards[i] === card) {
@@ -509,7 +462,7 @@ Vue.component('cards-display', {
             }
             this.$emit('reserve', [this.tier, card_index]);
         },
-        buy: function(card) {
+        buy: function (card) {
             var card_index;
             for (var i = 0; i < this.cards.length; i++) {
                 if (this.cards[i] === card) {
@@ -520,7 +473,7 @@ Vue.component('cards-display', {
         }
     },
     computed: {
-        card_width: function() {
+        card_width: function () {
             return ((100 - this.num_cards * 2) / this.num_cards).toString() + '%';
         }
     },
@@ -547,16 +500,16 @@ Vue.component('cards-display', {
 Vue.component('card-display', {
     props: ['card', 'player', 'show_reserve_button', 'show_card_buttons'],
     computed: {
-        background_colour: function() {
+        background_colour: function () {
             return background_colours[this.card.colour];
         },
-        buyable: function() {
+        buyable: function () {
             return this.player.can_afford(this.card)[0];
         },
-        reservable: function() {
+        reservable: function () {
             return (this.player.cards_in_hand.length < 3);
         },
-        buy_button_top: function() {
+        buy_button_top: function () {
             if (this.show_reserve_button) {
                 return "26%";
             }
@@ -605,7 +558,7 @@ Vue.component('card-display-table-row', {
 Vue.component('supply-display', {
     props: ['gems', 'show_card_count', 'nobles'],
     computed: {
-        num_gems: function() {
+        num_gems: function () {
             let total = 0;
             for (let colour of colours) {
                 total += this.gems[colour];
@@ -643,7 +596,7 @@ function noble_string(noble) {
 Vue.component('nobles-display', {
     props: ['nobles'],
     computed: {
-        noble_strings: function() {
+        noble_strings: function () {
             let strings = [];
             for (let noble of this.nobles) {
                 strings.push(noble_string(noble));
@@ -716,7 +669,7 @@ function move_to_html(move) {
         for (let colour of colours) {
             if (colour in card.gems && card.gems[colour] != 0) {
                 let number = card.gems[colour];
-                html += '<span class="' + colour +'">' + number + '</span>&nbsp;';
+                html += '<span class="' + colour + '">' + number + '</span>&nbsp;';
             }
         }
         html += 'from tier ' + move['tier'];
@@ -737,7 +690,7 @@ function move_to_html(move) {
         for (let colour of colours) {
             if (colour in card.gems && card.gems[colour] != 0) {
                 let number = card.gems[colour];
-                html += '<span class="' + colour +'">' + number + '</span>&nbsp;';
+                html += '<span class="' + colour + '">' + number + '</span>&nbsp;';
             }
         }
         if (action === 'buy_reserved') {
@@ -751,7 +704,7 @@ function move_to_html(move) {
             if (colour in cost && cost[colour] != 0) {
                 let number = cost[colour];
                 was_free = false;
-                html += '<span class="' + colour +'">' + number + '</span>&nbsp;';
+                html += '<span class="' + colour + '">' + number + '</span>&nbsp;';
             }
         }
         if (was_free) {
@@ -800,31 +753,35 @@ function random_player_index() {
 var app = new Vue({
     el: '#app',
     data: {
-        state: test_state,
+        state: new GameState(),
         human_player_indices: [random_player_index()],
         scheduled_move_func: null,
         discarding: false,
         winner_index: null,
         num_possible_moves: 0,
         debug_checked: false,
-        gems_selected: {'white': 0,
-                        'blue': 0,
-                        'green': 0,
-                        'red': 0,
-                        'black': 0,
-                        'gold': 0},
-        gems_discarded: {'white': 0,
-                         'blue': 0,
-                         'green': 0,
-                         'red': 0,
-                         'black': 0,
-                         'gold': 0}
+        gems_selected: {
+            'white': 0,
+            'blue': 0,
+            'green': 0,
+            'red': 0,
+            'black': 0,
+            'gold': 0
+        },
+        gems_discarded: {
+            'white': 0,
+            'blue': 0,
+            'green': 0,
+            'red': 0,
+            'black': 0,
+            'gold': 0
+        }
     },
     methods: {
-        testChangeGems: function() {
+        testChangeGems: function () {
             this.state.reduce_gems();
         },
-        test_state_vector: function() {
+        test_state_vector: function () {
             // for (let i = 0; i < 100; i++) {
             //     this.state.get_state_vector(0);
             // }
@@ -832,10 +789,10 @@ var app = new Vue({
             console.log('state vector length is', this.state.get_state_vector().length);
 
         },
-        test_ai_move: function() {
+        test_ai_move: function () {
             console.log('ai move:', ai.make_move(this.state));
         },
-        test_change_player_type: function() {
+        test_change_player_type: function () {
             if (this.player_type === 'human') {
                 this.player_type = 'ai';
             } else {
@@ -846,18 +803,18 @@ var app = new Vue({
                 this.gems_selected[colours[i]] = 0;
             }
         },
-        test_moves: function() {
+        test_moves: function () {
             console.log(this.state.get_valid_moves());
         },
-        random_move: function() {
+        random_move: function () {
             let ai = new RandomAI();
             let move = ai.make_move(this.state);
             this.state.make_move(move);
         },
-        test_win: function() {
+        test_win: function () {
             this.state.players[0].score = 15;
         },
-        reset: function() {
+        reset: function () {
             this.human_player_indices = [random_player_index()];
             this.state = new GameState();
             // this.player_type = 'human';
@@ -870,8 +827,8 @@ var app = new Vue({
             if (this.player_type === 'ai') {
                 this.schedule_ai_move();
             }
-        } ,
-        on_player_index: function() {
+        },
+        on_player_index: function () {
             let winner = this.state.has_winner();
             if (this.state.current_player_index === 0 &&
                 !(winner === null)) {
@@ -892,69 +849,77 @@ var app = new Vue({
                 this.gems_selected[colour] = 0;
             }
         },
-        schedule_ai_move: function() {
+        schedule_ai_move: function () {
             this.num_possible_moves = this.state.get_valid_moves(this.state.current_player_index).length;
             window.setTimeout(this.do_ai_move, 50);
         },
-        nn_ai_move: function() {
+        nn_ai_move: function () {
             console.log('Doing nn ai move');
             let move = ai.make_move(this.state);
             console.log('ai move is', move);
             this.state.make_move(move);
         },
-        do_ai_move: function() {
+        do_ai_move: function () {
             this.scheduled_move_func = null;
             // this.random_move();
             if (this.player_type === 'ai') {
                 this.nn_ai_move();
             }
         },
-        do_move_gems: function(info) {
+        do_move_gems: function (info) {
             let passed_gems = {};
             for (let colour of all_colours) {
                 if (colour in this.gems_selected) {
                     passed_gems[colour] = this.gems_selected[colour];
                 }
             }
-            this.state.make_move({action: 'gems',
-                                  gems: passed_gems},
-                                 false);
+            this.state.make_move({
+                action: 'gems',
+                gems: passed_gems
+            },
+                false);
             for (let colour of colours) {
                 this.gems_selected[colour] = 0;
             }
 
             this.check_if_discarding();
         },
-        do_move_reserve: function(info) {
+        do_move_reserve: function (info) {
             var gold_taken = 0;
             if (this.state.supply_gems['gold'] > 0) {
                 gold_taken = 1;
             }
-            this.state.make_move({action: 'reserve',
-                                  tier: info[0],
-                                  index: info[1],
-                                  gems: {'gold': gold_taken}},
-                                 false);
+            this.state.make_move({
+                action: 'reserve',
+                tier: info[0],
+                index: info[1],
+                gems: { 'gold': gold_taken }
+            },
+                false);
             this.check_if_discarding();
         },
-        do_move_buy: function(info) {
+        do_move_buy: function (info) {
             let tier = info[0];
             if (tier === 'hand') {
-                this.state.make_move({action: 'buy_reserved',
-                                      tier: info[0],
-                                      index: info[1],
-                                      gems: info[2]},
-                                     false);
+                this.state.make_move({
+                    action: 'buy_reserved',
+                    tier: info[0],
+                    index: info[1],
+                    gems: info[2]
+                },
+                    false);
             } else {
-                this.state.make_move({action: 'buy_available',
-                                      tier: info[0],
-                                      index: info[1],
-                                      gems: info[2]},
-                                     false);
+                this.state.make_move({
+                    action: 'buy_available',
+                    tier: info[0],
+                    index: info[1],
+                    gems: info[2]
+                },
+                    false);
             }
             this.check_if_discarding();
         },
-        check_if_discarding: function() {
+        check_if_discarding: function () {
             // let player = this.human_player;
             let player = this.current_player;
             if (player.total_num_gems() > 10) {
@@ -964,7 +929,7 @@ var app = new Vue({
                 this.state.increment_player();
             }
         },
-        do_discard_gems: function() {
+        do_discard_gems: function () {
             let player = this.current_player;
             let state = this.state;
             for (let colour of all_colours) {
@@ -976,7 +941,7 @@ var app = new Vue({
         }
     },
     computed: {
-        player_type: function() {
+        player_type: function () {
             // return 'human';
             for (let index of this.human_player_indices) {
                 if (index === this.state.current_player_index) {
@@ -985,32 +950,32 @@ var app = new Vue({
             }
             return 'ai';
         },
-        current_player: function() {
+        current_player: function () {
             return this.state.players[this.state.current_player_index];
         },
-        human_player: function() {
+        human_player: function () {
             return this.state.players[this.human_player_index];
         },
-        round_number: function() {
+        round_number: function () {
             return this.state.round_number;
         },
-        supply_gems: function() {
+        supply_gems: function () {
             return this.state.supply_gems;
         },
-        players: function() {
+        players: function () {
             return this.state.players;
         },
-        indexed_players: function() {
+        indexed_players: function () {
             var players = {};
             for (let i = 0; i < this.num_players; i++) {
                 players[i] = this.players[i];
             }
             return players;
         },
-        show_card_buttons: function() {
+        show_card_buttons: function () {
             return !this.discarding && this.player_type === 'human' && (this.winner_index === null);
         },
-        has_winner: function() {
+        has_winner: function () {
             return !(this.winner_index === null);
         }
     }
