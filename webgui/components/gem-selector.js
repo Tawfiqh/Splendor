@@ -49,7 +49,6 @@ Vue.component('gem-selector', {
     <p class="card-title">Your gems &amp; cards</p>
     <table class="gem-selector-table">
       <tr>
-        <td>Gems</td>
         <gems-table-gem-counter v-for="(number, colour) in player_gems"
             v-bind:key="colour"
             v-bind:colour="colour"
@@ -57,7 +56,7 @@ Vue.component('gem-selector', {
         </gems-table-gem-counter>
       </tr>
       <tr>
-        <td>Cards</td>
+
         <gems-table-card-counter v-for="(number, colour) in player_cards"
             v-bind:key="colour"
             v-bind:colour="colour"
@@ -70,7 +69,7 @@ Vue.component('gem-selector', {
     <p class="card-title">From the supply (this turn)</p>
     <table class="gem-selector-table">
       <tr>
-        <td>Gems to take</td>
+
         <gems-table-gem-counter v-for="(number, colour) in gems"
             v-bind:key="colour"
             v-bind:colour="colour"
@@ -78,7 +77,7 @@ Vue.component('gem-selector', {
         </gems-table-gem-counter>
       </tr>
       <tr>
-        <td></td>
+
         <increment-button v-for="(number, colour) in gems"
                           v-bind:key="colour"
                           v-bind:enabled="can_increment[colour]"
@@ -88,7 +87,7 @@ Vue.component('gem-selector', {
         </increment-button>
       </tr>
       <tr>
-        <td></td>
+       
         <decrement-button v-for="(number, colour) in gems"
                           v-bind:key="colour"
                           v-bind:enabled="can_decrement[colour]"
