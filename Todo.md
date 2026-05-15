@@ -1,6 +1,6 @@
 FE - information architecture:
     - ✅ Add a small line between current hand cards / gems and the gems a player is buying — also make it clear that is the supply
-    - Diplomats should be a separate box
+    - ✅ Diplomats should be a separate box
     - Correct order of gems
     - Move the “moves log” to a panel on the right that has clear rows and auto scrolls to the bottom + highlights the last move!
 

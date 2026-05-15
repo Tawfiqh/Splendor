@@ -144,6 +144,10 @@ h1 {
     padding-left: 5px;
     padding-right: 5px;
     max-width: 380px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .column-left p {
@@ -372,19 +376,6 @@ h1 {
 
 .card-display-table {
     height: 100%;
-}
-
-.supply-display {
-    margin-top: 10px;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: grey;
-    border-width: 5px;
-    background-color: #eeeeee;
-}
-
-.supply-display h3 {
-    margin-left: 10px;
 }
 
 .ai-move-status {

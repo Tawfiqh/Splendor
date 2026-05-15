@@ -17,7 +17,7 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 
 ## How each piece works
 
-- **`webgui/components/*`** — Registers the Vue  components . Uses globals(`colours`) from `game.js` and table/button components registered in `script.js`; it loads before `script.js` so it is registered before `new Vue()`, and child tags resolve when the app renders.
+- **`webgui/components/*`** — Registers Vue UI pieces (`gem-selector.js`, `move-maker.js`, `supply-display.js`, etc.). They use the global `colours` from `game.js` and child tags such as `gems-table` from `script.js`; scripts load before `script.js` so components register before `new Vue()`, and child tags resolve when the app renders.
 
 
 - **`run.sh`** — Ensures `webgui/vue.min.js` (copy from `docs/`), `webgui/math.min.js` (pinned CDN download), and a stub `dynamic_test_state.js` if missing; then runs `python3 -m http.server` from `webgui/`. Override port with `PORT=9000 ./run.sh`.
