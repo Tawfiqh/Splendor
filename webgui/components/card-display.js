@@ -37,7 +37,7 @@ Vue.component('card-display', {
 <li class="card-display">
 <div class="card-display-contents" v-bind:style="{ background: card_background }">
     <div class="card-display-top-row" v-if="show_top_row">
-        <div class="card-display-actions" v-if="show_actions">
+        <div class="card-display-actions">
             <button class="reserve-button"
                     v-if="show_reserve_button && reservable"
                     v-bind:disabled="!reservable"

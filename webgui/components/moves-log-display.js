@@ -58,7 +58,7 @@ Vue.component('moves-log-display', {
     computed: {
         move_strings: function () {
             let strs = [];
-            for (let i = 0; i < this.moves.length; i++) {
+            for (let i = this.moves.length - 1; i >= 0; i--) {
                 let move = this.moves[i];
                 let round = math.floor(i / 2) + 1;
                 let player = (i % 2) + 1;
@@ -71,18 +71,18 @@ Vue.component('moves-log-display', {
     },
     watch: {
         'moves.length': function () {
-            this.scrollLogToBottom();
+            this.scrollLogToTop();
         }
     },
     mounted: function () {
-        this.scrollLogToBottom();
+        this.scrollLogToTop();
     },
     methods: {
-        scrollLogToBottom: function () {
+        scrollLogToTop: function () {
             this.$nextTick(function () {
                 var el = this.$refs.movesLogScroll;
                 if (el) {
-                    el.scrollTop = el.scrollHeight;
+                    el.scrollTop = 0;
                 }
             }.bind(this));
         }
@@ -99,7 +99,7 @@ Vue.component('moves-log-display', {
             <li v-for="(line, index) in move_strings"
                 v-bind:key="index"
                 class="moves-log-row"
-                v-bind:class="{ 'moves-log-row--last': index === move_strings.length - 1 }">
+                v-bind:class="{ 'moves-log-row--last': index === 0 }">
                 <span v-html="line"></span>
             </li>
         </ul>

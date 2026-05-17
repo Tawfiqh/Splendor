@@ -30,7 +30,7 @@ A Splendor board-game AI (neural net + reinforcement learning) with a **browser-
 
 - **Page columns** — **`style.css`** lays out **`.row`** as **CSS Grid**: one column on small screens, two columns from **768px** (left: supply/players, right: market + turn UI). **`column-right-layout.css`** switches **`.column-right-layout`** from **column flex** (market first, sidebar below) to **row flex** from **1024px**, with `.column-right-sidebar-top` / `-bottom` for nobles + moves log.
 
-- **Moves log** — **`moveToHtml`** (in `moves-log-display.js`) builds each line’s HTML; colours use `style.css`. The list zebra-stripes rows, highlights the newest, and **auto-scrolls** to the bottom when `moves` grows (`watch` + **`mounted`** + `$nextTick`).
+- **Moves log** — **`moveToHtml`** (in `moves-log-display.js`) builds each line’s HTML; colours use `style.css`. Entries are shown **newest first** (reverse chronological). The list zebra-stripes rows, highlights the newest at the top (`moves-log-row--last` on `index === 0`), and **auto-scrolls** to the top when `moves` grows (`watch` + **`mounted`** + `$nextTick`).
 
 - **State vector vs neural net (`state_vector_v02.js`)** — The JS feature vector must stay **2300** floats wide to match `weights.js` / `INPUT_SIZE` in `lapidary/nn.py`. For the per-player **total gem count** one-hot (`zeros(11)`), simulation can briefly exceed 10 gems before discard; assigning `arr[11] = 1` in JS **extends the array** to length 12 and corrupts the vector. Always index with **`Math.min(player.total_num_gems(), 10)`**, matching Python `set_player_gems(..., 'all', number)` which uses **`min(number, 10)`**.
 
