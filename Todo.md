@@ -15,10 +15,8 @@ FE style:
     - ✅ Make it easier to read - change the font
     - ✅ Add nicer CSS for the buttons 
     - ✅ Add a nice gradient for the cards
-    - Don't show the number if it's 0
-    - Nobles: make it fit on one line (use gem-counter css)
-    - 
-    
+    - ✅ Don't show the number if it's 0
+    - ✅Nobles: make it fit on one line (maybe use gem-counter css)
 
 Fe Advanced style:
     - Add animation so it’s clear what each player does

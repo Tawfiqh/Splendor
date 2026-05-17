@@ -1,5 +1,5 @@
 function noble_string(noble) {
-    let string = '<span class="bold">3 points</span> for ';
+    let string = '<span class="bold">3: </span>';
     let first = true;
     for (let colour of colours) {
         if (colour in noble.cards && noble.cards[colour] > 0) {
