@@ -4,24 +4,14 @@
 .gem-selector-table .decrement-button {
     box-sizing: border-box;
     vertical-align: middle;
-    width: 44px;
+    width: clamp(44px, 12vw, 48px);
     min-width: 44px;
-    max-width: 44px;
-    height: 44px;
+    max-width: 52px;
+    height: clamp(44px, 12vw, 48px);
+    min-height: 44px;
     margin: 0;
     padding: 6px;
-    font-size: 17px;
-}
-
-.gem-selector-table .gem-selector-draft-cell {
-    box-sizing: border-box;
-    vertical-align: top;
-    width: 44px;
-    min-width: 44px;
-    max-width: 44px;
-    height: auto;
-    margin: 0;
-    padding: 2px;
+    font-size: clamp(15px, 3.5vmin, 18px);
 }
 
 .gem-selector-table .gems-table-gem-counter {
@@ -29,14 +19,14 @@
 }
 
 .gem-selector-table .gems-table-card-counter {
-    border-radius: 5%;
+    border-radius: var(--radius-sm);
 }
 
 .gem-selector-table .increment-button button,
 .gem-selector-table .decrement-button button {
     padding: 0;
     min-height: 0;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
 }
 
 .increment-button button {

@@ -1,12 +1,13 @@
 .supply-display {
-    margin-top: 10px;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: grey;
-    border-width: 5px;
-    background-color: #eeeeee;
+    margin-top: var(--space-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: linear-gradient(180deg, var(--color-bg-panel) 0%, var(--color-bg-elevated) 100%);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-sm) var(--space-md) var(--space-md);
 }
 
 .supply-display h3 {
-    margin-left: 10px;
+    margin: 0 0 var(--space-sm) var(--space-xs);
+    font-size: var(--font-size-lg);
 }

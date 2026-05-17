@@ -4,12 +4,113 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* Jewel-themed surfaces */
+    --color-bg-primary: #f4f1e8;
+    --color-bg-secondary: #ebe6d9;
+    --color-bg-elevated: #fdfcf8;
+    --color-bg-card: #f8f6f0;
+    --color-bg-panel: #fefefe;
+    --color-bg-panel-transparent: rgba(255, 255, 255, 0.28);
+    --color-bg-deep: #1a1a2e;
+    --color-bg-deep-secondary: #16213e;
+
+    --color-gold: #d4af37;
+    --color-gold-light: #f0d78c;
+    --color-accent: #c9a227;
+
+    --gem-white: #f5f5f5;
+    --gem-blue: #1565c0;
+    --gem-green: #2e7d32;
+    --gem-red: #c62828;
+    --gem-black: #212121;
+    --gem-gold: #ffc107;
+
+    --color-text: #1f1f24;
+    --color-text-muted: #5c5c66;
+    --color-border: rgba(26, 26, 46, 0.12);
+    --color-border-strong: rgba(26, 26, 46, 0.22);
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+    /* Typography */
+    --font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: clamp(1.25rem, 4vw, 1.75rem);
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.45;
+
+    /* Motion */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+
+    /* Layout rhythm */
+    --app-padding-inline: clamp(var(--space-sm), 3vw, var(--space-lg));
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     margin: 0;
-    background-color: #ffffee;
-    font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    background: radial-gradient(120% 80% at 50% 0%, var(--color-bg-secondary) 0%, var(--color-bg-primary) 45%, var(--color-bg-primary) 100%);
+    color: var(--color-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+}
+
+#app {
+    padding-inline: var(--app-padding-inline);
+    padding-block: var(--space-md);
+    max-width: min(100%, 100rem);
+    margin-inline: auto;
 }
 
 h1 {
     text-align: center;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-md);
+    color: var(--color-text);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
