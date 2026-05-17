@@ -29,11 +29,9 @@
 
 .cards-display ul {
     margin-top: 1%;
-    height: 98%;
     min-height: 0;
     width: 100%;
     flex-wrap: nowrap;
-    flex: 1;
     border: none;
     background: transparent;
 }
@@ -51,12 +49,12 @@
     gap: clamp(4px, 1.2vw, 12px);
 }
 
-.cards-display .single-line-list > li {
+.cards-display .single-line-list>li {
     flex: 1 1 0;
     min-width: 0;
 }
 
-.cards-display--hand .single-line-list > li {
+.cards-display--hand .single-line-list>li {
     flex: 1 1 calc(100% / var(--hand-slots, 4));
     max-width: calc(100% / var(--hand-slots, 4));
 }

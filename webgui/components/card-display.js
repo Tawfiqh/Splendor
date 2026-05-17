@@ -11,31 +11,47 @@ Vue.component('card-display', {
         reservable: function () {
             return (this.player.cards_in_hand.length < 3);
         },
-        buy_button_top: function () {
-            if (this.show_reserve_button) {
-                return "26%";
+        show_top_row: function () {
+            if (this.card.points > 0) {
+                return true;
             }
-            return "5%";
+            if (!this.show_card_buttons) {
+                return false;
+            }
+            if (this.buyable) {
+                return true;
+            }
+            return this.show_reserve_button && this.reservable;
+        },
+        show_actions: function () {
+            if (!this.show_card_buttons) {
+                return false;
+            }
+            if (this.buyable) {
+                return true;
+            }
+            return this.show_reserve_button && this.reservable;
         },
     },
     template: `
 <li class="card-display">
 <div class="card-display-contents" v-bind:style="{ background: card_background }">
-    <div class="card-display-top-row">
+    <div class="card-display-top-row" v-if="show_top_row">
+        <div class="card-display-actions" v-if="show_actions">
+            <button class="reserve-button"
+                    v-if="show_reserve_button && reservable"
+                    v-bind:disabled="!reservable"
+                    v-on:click="$emit('reserve', card)">
+                reserve
+            </button>
+            <button class="buy-button"
+                    v-if="buyable"
+                    v-bind:disabled="!buyable"
+                    v-on:click="$emit('buy', card)">
+                buy
+            </button>
+        </div>
         <p v-if="card.points > 0" class="card-points" aria-label="Victory points">{{ card.points }}</p>
-        <button class="reserve-button"
-                v-if="show_reserve_button && show_card_buttons && reservable"
-                v-bind:disabled="!reservable"
-                v-on:click="$emit('reserve', card)">
-            reserve
-        </button>
-        <button class="buy-button"
-                v-if="show_card_buttons && buyable"
-                v-bind:disabled="!buyable"
-                v-bind:style="{top: buy_button_top}"
-                v-on:click="$emit('buy', card)">
-            buy
-        </button>
     </div>
     <gems-list v-bind:gems="card.gems" 
                v-bind:display_zeros="false">
