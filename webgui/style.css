@@ -1,159 +1,174 @@
-.player-display {
-    margin-top: 5px;
-    border-color: red;
-    border-radius: 10px;
-    border-style: solid;
-}
-
-.player-display h3 {
-    margin-left: 10px;
-}
-
-.market-displays {
-    height: 55vh;
-    max-height: 70vw;
-    border-color: yellow;
-    border-radius: 5px;
-    /* border-style: solid; */
-}
+/* Main layout — stacks on narrow viewports, two columns on larger screens */
 
 .row {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    width: 100%;
+    max-width: 100%;
+    align-items: start;
+    justify-items: stretch;
+}
+
+@media (min-width: 768px) {
+    .row {
+        grid-template-columns: minmax(260px, min(38vw, 400px)) minmax(0, 1fr);
+        gap: var(--space-lg);
+        align-items: start;
+    }
 }
 
 .column-left {
-    flex: 34%;
-    padding-left: 5px;
-    padding-right: 5px;
-    max-width: 380px;
-
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-md);
+    padding: 0;
+    min-width: 0;
+    width: 100%;
+}
+
+.column-right {
+    min-width: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0;
 }
 
 .column-left p {
     text-align: center;
 }
 
-.column-right {
-    flex: 66%;
-    padding-left: 5px;
-    padding-right: 5px;
-    max-width: 62vh;
-    text-align: center;
+/* Player panels */
+
+.player-display {
+    margin-top: var(--space-xs);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    box-shadow: var(--shadow-sm);
 }
 
-/* .unstyled-list { */
-/*     list-style: none; */
-/*     padding-left: 0px; */
+.player-display h3 {
+    margin-left: var(--space-md);
+}
 
-/* } */
+/* Market (three tiers) */
+
+.market-displays {
+    height: clamp(280px, 52vh, 640px);
+    max-height: min(70vw, 85vh);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: var(--shadow-inset), var(--shadow-sm);
+    overflow: hidden;
+    padding: var(--space-xs);
+}
+
+/* Gems strip on cards */
 
 .gems-list {
-    margin-top: 5px;
-    /* border-style: solid; */
-    border-color: blue;
-    border-radius: 5px;
+    margin-top: var(--space-xs);
+    border-radius: var(--radius-sm);
     position: absolute;
-    bottom: 5px;
+    bottom: var(--space-xs);
     width: 100%;
     min-width: 100%;
 }
 
 .gems-list h3 {
-    margin-left: 10px;
+    margin-left: var(--space-md);
 }
 
 .gems-list ul {
     list-style: none;
-    padding-left: 0px;
+    padding: 0;
     width: 100%;
     min-width: 100%;
     max-width: 100%;
-    list-style: none;
-    padding: 0px;
-    /* border-style: solid; */
-    border-color: orange;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
 }
-
 
 .gem-counter {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-style: solid;
     border-radius: 50%;
-    margin: 1px;
-    padding: 5px;
-    padding-left: 11px;
-    padding-right: 11px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    /* font-size: 18px; */
-    font-size: 2.25vh;
+    margin: 2px;
+    --gem-counter-size: clamp(1.4rem, 4.2vmin, 2rem);
+    min-width: var(--gem-counter-size);
+    min-height: var(--gem-counter-size);
+    aspect-ratio: 1;
+    padding: 0;
+    font-size: clamp(0.65rem, 2vmin, 0.95rem);
     font-weight: bold;
-    border-width: 3px;
+    border-width: 2px;
     text-align: center;
+    line-height: 1;
+    box-sizing: border-box;
 }
-
 
 .gems-table {
     width: 100%;
-    /* border-style: solid; */
-    border-color: cyan;
-    border-radius: 5px;
+    max-width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: var(--space-xs);
+    border-radius: var(--radius-sm);
 }
 
 .gems-table-gem-counter {
     border-style: solid;
     border-radius: 50%;
-    margin: 5px;
-    padding: 10px;
-    font-size: 24px;
+    margin: 0;
+    width: clamp(2.1rem, 12vw, 3.2rem);
+    height: clamp(2.1rem, 12vw, 3.2rem);
+    max-width: 100%;
+    padding: var(--radius-lg);
+    font-size: clamp(0.85rem, 2.8vmin, 1.35rem);
     font-weight: bold;
-    border-width: 4px;
+    border-width: 3px;
     text-align: center;
+    vertical-align: middle;
+    line-height: 1;
+    box-sizing: border-box;
 }
 
 .gems-table-card-counter {
     border-style: solid;
-    border-radius: 5%;
+    border-radius: var(--radius-sm);
     margin: 5px;
     padding: 10px;
-    font-size: 24px;
+    font-size: clamp(1rem, 2.5vmin, 1.4rem);
     font-weight: bold;
-    border-width: 4px;
+    border-width: 3px;
     text-align: center;
 }
 
 .gem-discarder {
-    border-width: 4px;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: grey;
-    /* height: 20vh; */
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
     text-align: center;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 10px;
-    background-color: #ffffde;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    margin-top: var(--space-md);
+    padding: var(--space-md) clamp(var(--space-md), 5vw, var(--space-xl));
+    padding-bottom: var(--space-md);
+    background: linear-gradient(180deg, var(--color-bg-panel) 0%, #fff8e8 100%);
+    box-shadow: var(--shadow-sm);
 }
 
 .gem-discarder button {
-    margin-top: 5px;
+    margin-top: var(--space-sm);
 }
 
 .gem-discarder-table {
-    width: 450px;
-    max-width: 450px;
-    margin-top: 30px;
-    /* border-style: solid; */
-    border-color: teal;
+    width: 100%;
+    max-width: min(450px, 100%);
+    margin-top: var(--space-lg);
     margin-left: auto;
     margin-right: auto;
 }
@@ -163,14 +178,16 @@
 }
 
 .ai-move-status {
-    margin-top: 50px;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: grey;
-    border-width: 5px;
-    background-color: #efefef;
-    min-height: 200px;
+    margin-top: var(--space-lg);
+    margin-inline: auto;
+    max-width: min(520px, 100%);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-strong);
+    background: var(--color-bg-panel);
+    box-shadow: var(--shadow-sm);
+    min-height: clamp(160px, 28vh, 220px);
     position: relative;
+    padding: var(--space-sm) var(--space-md);
 }
 
 .ai-move-status h3 {
@@ -180,29 +197,30 @@
 .loader-positioner {
     position: absolute;
     width: 100%;
-    /* margin-left: 50%; */
-    /* margin-right: auto; */
     margin-top: -50px;
 }
 
 .winner-display {
-    margin-top: 30px;
-    border-style: solid;
-    border-width: 5px;
-    border-color: orangered;
-    border-radius: 1vh;
-    background-color: #ffeeee;
+    margin-top: var(--space-lg);
+    margin-inline: auto;
+    max-width: min(520px, 100%);
+    border: 2px solid rgba(198, 40, 40, 0.55);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, #fff5f5 0%, #ffe8e8 100%);
+    box-shadow: var(--shadow-md);
     text-align: center;
+    padding: var(--space-sm) var(--space-md) var(--space-md);
 }
 
 .winner-display h3 {
     text-align: center;
-    font-weight: bold;
-    font-size: 35px;
+    font-weight: 700;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    margin: var(--space-sm) 0;
 }
 
 .winner-display button {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-md);
 }
 
 .bold {
@@ -210,43 +228,37 @@
 }
 
 .white {
-    color: white;
+    color: var(--gem-white);
     font-weight: bold;
-    text-shadow: 0px 0px 2px black;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
 }
 
 .blue {
-    color: blue;
+    color: var(--gem-blue);
     font-weight: bold;
 }
 
 .green {
-    color: green;
+    color: var(--gem-green);
     font-weight: bold;
 }
 
 .red {
-    color: red;
+    color: var(--gem-red);
     font-weight: bold;
 }
 
 .black {
-    color: black;
+    color: var(--gem-black);
     font-weight: bold;
 }
 
 .gold {
-    color: gold;
+    color: var(--gem-gold);
     font-weight: bold;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .top-left {
     position: absolute;
 }
-
-/* button { */
-/*     padding-left: 20px; */
-/*     padding-right: 20px; */
-/*     padding-top: 5px; */
-/*     padding-bottom: 5px; */
-/* } */
