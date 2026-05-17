@@ -21,20 +21,22 @@ Vue.component('card-display', {
     template: `
 <li class="card-display">
 <div class="card-display-contents" v-bind:style="{ background: card_background }">
-    <p class="card-points" aria-label="Victory points">{{ card.points }}</p>
-    <button class="reserve-button"
-            v-if="show_reserve_button && show_card_buttons && reservable"
-            v-bind:disabled="!reservable"
-            v-on:click="$emit('reserve', card)">
-        reserve
-    </button>
-    <button class="buy-button"
-            v-if="show_card_buttons && buyable"
-            v-bind:disabled="!buyable"
-            v-bind:style="{top: buy_button_top}"
-            v-on:click="$emit('buy', card)">
-        buy
-    </button>
+    <div class="card-display-top-row">
+        <p v-if="card.points > 0" class="card-points" aria-label="Victory points">{{ card.points }}</p>
+        <button class="reserve-button"
+                v-if="show_reserve_button && show_card_buttons && reservable"
+                v-bind:disabled="!reservable"
+                v-on:click="$emit('reserve', card)">
+            reserve
+        </button>
+        <button class="buy-button"
+                v-if="show_card_buttons && buyable"
+                v-bind:disabled="!buyable"
+                v-bind:style="{top: buy_button_top}"
+                v-on:click="$emit('buy', card)">
+            buy
+        </button>
+    </div>
     <gems-list v-bind:gems="card.gems" 
                v-bind:display_zeros="false">
     </gems-list>
